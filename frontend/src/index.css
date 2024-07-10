@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*Resetando a largura para funcionar bem em todos os navegadores*/
+*{
+  min-width: 0;
+}
