@@ -1,4 +1,5 @@
 import { X, Tag, Calendar } from "lucide-react";
+import { Button } from "../../components/button";
 
 interface CreateListModalProps{
   closeCreateLinkModal:()=>void
@@ -47,9 +48,9 @@ export function CreateListModal(props: CreateListModalProps){
 
       </div>
       
-      <button type="submit" className="bg-lime-300 w-full justify-center text-lime-950 rounded-lg px-5 h-10 font-medium flex items-center gap-2 hover:bg-lime-400">
+      <Button size="full" type="submit">
          Salvar link
-      </button>
+      </Button>
 
      
 

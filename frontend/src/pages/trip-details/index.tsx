@@ -6,6 +6,7 @@ import { Guests } from "./guests";
 import { CreateListModal } from "./create-list-modal";
 import { Activities } from "./activities";
 import { DestinationAndDate } from "./destination-and-date";
+import { Button } from "../../components/button";
 
 
 
@@ -13,6 +14,7 @@ import { DestinationAndDate } from "./destination-and-date";
 export function TripDetail(){
   const [isCreateActivityModalOpen, setIsCreateActivityModalOpen] = useState(false)
   const [isCreateLinkModalOpen, setIsCreateLinkModalOpen] = useState(false)
+  const [isCreateLinkGuestModalOpen, setIsCreateGuestModalOpen] = useState(false)
 
   function openCreateActivityModal(){
     setIsCreateActivityModalOpen(true);
@@ -28,6 +30,13 @@ export function TripDetail(){
     setIsCreateLinkModalOpen(false);
   }
 
+  function openCreateGuestModal(){
+    setIsCreateGuestModalOpen(true);
+  }
+  function closeCreateGuestModal(){
+    setIsCreateGuestModalOpen(false);
+  }
+
   return (
     <div className="max-w-6xl py-10 mx-auto space-y-8">
       <DestinationAndDate />   
@@ -36,10 +45,10 @@ export function TripDetail(){
         <div className="flex-1 space-y-6">
           <div className="flex justify-between items-center">
             <h2 className="text-3xl font-semibold">Atividades</h2>
-            <button onClick={openCreateActivityModal} className="bg-lime-300 text-lime-950 rounded-lg px-5 py-2 font-medium flex items-center gap-2 hover:bg-lime-400">
+            <Button onClick={openCreateActivityModal} >
               <Plus className="size-5" />
               Cadastrar atividade 
-            </button>
+            </Button>
           </div>
 
           <Activities />
@@ -69,6 +78,7 @@ export function TripDetail(){
           closeCreateLinkModal={closeCreateLinkModal}
         />
       )}
+
 
     </div>
   )
