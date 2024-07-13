@@ -3,27 +3,22 @@ import { Button } from "../../../components/button";
 import { useState } from "react";
 import { DateRange, DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
-import { addDays, format } from "date-fns";
+import { format } from "date-fns";
 
 interface DestinationAndDataStepProps{
   isGuestsInputOpen: boolean
-  openGuestsInput: () => void
+  range: DateRange | undefined
   closeGuestsInput: () => void
+  openGuestsInput: () => void
+  setDestination: (destination: string) => void
+  setRange: (dates: DateRange | undefined) => void
   
 }
 
-
+ 
 
 export function DestinationAndDataStep(props: DestinationAndDataStepProps){
   const [isDatePikerOpen, setIsDatePikerOpen] = useState(false);
-
-  const initialRange: DateRange = {
-    from: new Date(),
-    to: addDays(new Date(), 4)
-  };
-
-  const [range, setRange] = useState<DateRange | undefined>(initialRange);
-
 
   function openDatePiker(){
     setIsDatePikerOpen(true);
@@ -33,20 +28,27 @@ export function DestinationAndDataStep(props: DestinationAndDataStepProps){
   }
 
 
-  const displayedDate = range && range.from && range.to ? format(range.from,'d/LL').concat('-').concat(format(range.to,'d/LL'))  : null
+  const displayedDate = props.range && props.range.from && props.range.to ? format(props.range.from,'d/LL').concat('-').concat(format(props.range.to,'d/LL'))  : null
 
   return(
     <div className="bg-zinc-900 text-zinc-300 h-16 rounded-xl px-4 flex items-center shadow-shape">
 
     <div className="flex items-center gap-2 flex-1">
       <MapPin className="size-5" />
-      <input disabled={props.isGuestsInputOpen} type="text" placeholder="Para onde você vai?" className="bg-transparent text-lg placeholder-zinc-400 outline-none flex-1" />
+      <input 
+        disabled={props.isGuestsInputOpen} 
+        type="text" 
+        placeholder="Para onde você vai?" 
+        className="bg-transparent text-lg placeholder-zinc-400 outline-none flex-1"
+        onChange={event => props.setDestination(event.target.value)}
+      />
     </div>
 
     <button onClick={openDatePiker} className="flex items-center gap-2" disabled={props.isGuestsInputOpen} >
       <Calendar className="size-5" />
       <span className="text-lg text-ellipsis text-left text-zinc-400 w-40 flex-1">
-        {displayedDate} 
+        {displayedDate || 'Quando?'} 
+
       </span>
       
     </button>
@@ -79,7 +81,7 @@ export function DestinationAndDataStep(props: DestinationAndDataStepProps){
                 </button>
               </div>
             </div>
-            <DayPicker mode="range" selected={range} onSelect={setRange}  />
+            <DayPicker mode="range" selected={props.range} onSelect={props.setRange}  />
 
 
           </div>

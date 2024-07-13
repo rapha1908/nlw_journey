@@ -5,6 +5,8 @@ import { Button } from "../../components/button";
 interface ConfirmTripModalProps{
   closeConfirmTripModal : () => void
   createTrip : (event: FormEvent<HTMLFormElement>) => void
+  setOwnerName: (name:string) => void
+  setOwnerEmail: (email:string) => void
 
 
 }
@@ -37,6 +39,7 @@ export function ConfirmTripModal(props: ConfirmTripModalProps){
           name="name" 
           placeholder="Seu nome completo" 
           className="bg-transparent text-lg placeholder-zinc-400 outline-none flex-1 text-sm" 
+          onChange={event => props.setOwnerName(event.target.value)}
         />
       </div>
       <div className="flex items-center gap-2 flex-1 px-5 py-2.5 bg-zinc-950 text-zinc-400 p-2.5 rounded-lg " >
@@ -46,6 +49,8 @@ export function ConfirmTripModal(props: ConfirmTripModalProps){
           name="email" 
           placeholder="Seu e-mail pessoal" 
           className="bg-transparent text-lg placeholder-zinc-400 outline-none flex-1 text-sm" 
+          onChange={event => props.setOwnerEmail(event.target.value)}
+
         />
       </div>
       <Button size="full" type="submit" className="bg-lime-300 w-full justify-center text-lime-950 rounded-lg px-5 h-10 font-medium flex items-center gap-2 hover:bg-lime-400">
